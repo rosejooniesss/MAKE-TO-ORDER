@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoPack Solutions - Start Your Order</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --forest: #3c4b33;
+            --peachtree: #efb9a5;
+            --sunflower: #e9cf70;
+            --mist: #eeeced;
+            --stream: #c7d6e3;
+            --meadow: #bfc694;
+            --blossom: #ffe6dd;
+            --fern: #6f8d5e;
+            --earth: #000000;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--mist) 0%, var(--blossom) 100%);
+            min-height: 100vh;
+            color: var(--earth);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: var(--forest);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero-section {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            text-align: center;
+            border-left: 6px solid var(--forest);
+        }
+
+        .hero-title {
+            color: var(--forest);
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            color: var(--fern);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-title {
+            color: var(--forest);
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .popular-section {
+            margin-bottom: 4rem;
+        }
+
+        .popular-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .category-section {
+            margin-bottom: 3rem;
+        }
+
+        .category-title {
+            color: var(--forest);
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            border-left: 4px solid var(--meadow);
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+            border-color: var(--forest);
+        }
+
+        .product-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            background: var(--mist);
+        }
+
+        .product-content {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--forest);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-description {
+            color: var(--fern);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .product-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-tag {
+            background: var(--meadow);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 16px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--forest);
+            margin-bottom: 1rem;
+        }
+
+        .order-btn {
+            width: 100%;
+            background: var(--forest);
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .order-btn:hover {
+            background: var(--fern);
+            transform: translateY(-1px);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--sunflower);
+            color: var(--earth);
+            padding: 0.3rem 0.8rem;
+            border-radius: 16px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .cta-section {
+            background: var(--forest);
+            color: white;
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .cta-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .cta-subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            background: var(--sunflower);
+            color: var(--earth);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .cta-btn:hover {
+            background: var(--peachtree);
+            transform: translateY(-2px);
+        }
+
+        .secondary-btn {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .secondary-btn:hover {
+            background: white;
+            color: var(--forest);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .main-container {
+                padding: 1rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .popular-grid,
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                🌱 EcoPack Solutions
+            </div>
+            <div class="user-info">
+                <span>Welcome! Ready to start your first order?</span>
+                <div style="width: 40px; height: 40px; background: var(--peachtree); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">👤</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <section class="hero-section">
+            <h1 class="hero-title">Choose Your Sustainable Packaging</h1>
+            <p class="hero-subtitle">Browse our eco-friendly packaging solutions and start customizing your perfect order. All materials are 100% biodegradable and sustainably sourced.</p>
+        </section>
+
+        <section class="popular-section">
+            <h2 class="section-title">🔥 Most Popular Choices</h2>
+            <div class="popular-grid">
+                <div class="product-card" style="position: relative;">
+                    <div class="popular-badge">Most Popular</div>
+                    <img src="sustainable-cardboard-box-packaging.jpg" alt="Sustainable Cardboard Box" class="product-image">
+                    <div class="product-content">
+                        <h3 class="product-title">Eco Shipping Boxes</h3>
+                        <p class="product-description">Durable corrugated boxes made from 100% recycled materials, perfect for e-commerce shipping and product protection.</p>
+                        <div class="product-features">
+                            <span class="feature-tag">100% Recyclable</span>
+                            <span class="feature-tag">Custom Sizes</span>
+                            <span class="feature-tag">Branded Options</span>
+                        </div>
+                        <div class="product-price">Starting at $0.85/unit</div>
+                        <button class="order-btn">Start Customizing</button>
+                    </div>
+                </div>
+
+                <div class="product-card" style="position: relative;">
+                    <div class="popular-badge">Best Value</div>
+                    <img src="kraft-paper-shopping-bag.jpg" alt="Kraft Paper Shopping Bag" class="product-image">
+                    <div class="product-content">
+                        <h3 class="product-title">Kraft Paper Bags</h3>
+                        <p class="product-description">Premium kraft paper shopping bags with reinforced handles, ideal for retail stores and boutique businesses.</p>
+                        <div class="product-features">
+                            <span class="feature-tag">FSC Certified</span>
+                            <span class="feature-tag">Strong Handles</span>
+                            <span class="feature-tag">Custom Print</span>
+                        </div>
+                        <div class="product-price">Starting at $0.45/unit</div>
+                        <button class="order-btn">Start Customizing</button>
+                    </div>
+                </div>
+
+                <div class="product-card" style="position: relative;">
+                    <div class="popular-badge">Trending</div>
+                    <img src="compostable-paper-coffee-cup.jpg" alt="Compostable Coffee Cup" class="product-image">
+                    <div class="product-content">
+                        <h3 class="product-title">Compostable Cups</h3>
+                        <p class="product-description">Plant-based coffee cups that break down completely in commercial composting facilities within 90 days.</p>
+                        <div class="product-features">
+                            <span class="feature-tag">Compostable</span>
+                            <span class="feature-tag">Heat Resistant</span>
+                            <span class="feature-tag">Custom Logo</span>
+                        </div>
+                        <div class="product-price">Starting at $0.12/unit</div>
+                        <button class="order-btn">Start Customizing</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="category-section">
+            <h3 class="category-title">📦 Shipping & Mailing</h3>
+            <div class="category-grid">
+                <div class="product-card">
+                    <img src="cardboard-mailing-tube.jpg" alt="Cardboard Mailing Tube" class="product-image">
+                    <div class="product-content">
+                        <h3 class="product-title">Mailing Tubes</h3>
+                        <p class="product-description">Sturdy cardboard tubes perfect for shipping posters, documents, and artwork safely.</p>
+                        <div class="product-features">
+                            <span class="feature-tag">Crush Resistant</span>
+                            <span class="feature-tag">Various Sizes</span>
+                        </div>
+                        <div class="product-price">Starting at $1.20/unit</div>
+                        <button class="order-btn">Start Customizing</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <img src="biodegradable-shipping-mailer.jpg" alt="Biodegradable Shipping Mailer" class="product-image">
+                    <div class="product-content">
+                        <h3 class="product-title">Biodegradable Mailers</h3>
+                        <p class="product-description">Lightweight shipping envelopes that decompose naturally while protecting your products.</p>
+                        <div class="product-features">
+                            <span class="feature-tag">Biodegradable</span>
+                            <span class="feature-tag">Water Resistant</span>
+                        </div>
+                        <div class="product-price">Starting at $0.65/unit</div>
+                        <button class="order-btn">Start Customizing</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="category-section">
+            <h3 class="category-title">☕ Food Service</h3>
+            <div class="category-grid">
+                <div class="product-card">
+                    <img src="paper-drinking-straws.jpg" alt="Paper Drinking Straws" class="product-image">
+                    <div class="product-content">
+                        <h3 class="product-title">Paper Straws</h3>
+                        <p class="product-description">Durable paper straws that maintain integrity in beverages while being fully biodegradable.</p>
+                        <div class="product-features">
+                            <span class="feature-tag">Biodegradable</span>
+                            <span class="feature-tag">Food Safe</span>
+                            <span class="feature-tag">Colorful</span>
+                        </div>
+                        <div class="product-price">Starting at $0.03/unit</div>
+                        <button class="order-btn">Start Customizing</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <img src="cardboard-cup-carrier-holder.jpg" alt="Cardboard Cup Carrier" class="product-image">
+                    <div class="product-content">
+                        <h3 class="product-title">Cup Holders</h3>
+                        <p class="product-description">Convenient cardboard carriers for multiple beverages, perfect for coffee shops and takeout.</p>
+                        <div class="product-features">
+                            <span class="feature-tag">Sturdy Design</span>
+                            <span class="feature-tag">Multiple Sizes</span>
+                        </div>
+                        <div class="product-price">Starting at $0.18/unit</div>
+                        <button class="order-btn">Start Customizing</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="category-section">
+            <h3 class="category-title">🎁 Specialty & Gifts</h3>
+            <div class="category-grid">
+                <div class="product-card">
+                    <img src="small-kraft-paper-gift-bag.jpg" alt="Small Gift Bag" class="product-image">
+                    <div class="product-content">
+                        <h3 class="product-title">Small Gift Bags</h3>
+                        <p class="product-description">Elegant small bags perfect for jewelry, cosmetics, and small gift items with premium feel.</p>
+                        <div class="product-features">
+                            <span class="feature-tag">Premium Feel</span>
+                            <span class="feature-tag">Multiple Colors</span>
+                            <span class="feature-tag">Ribbon Handles</span>
+                        </div>
+                        <div class="product-price">Starting at $0.35/unit</div>
+                        <button class="order-btn">Start Customizing</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <img src="floral-wrapping-paper-bouquet.jpg" alt="Bouquet Wrapping Paper" class="product-image">
+                    <div class="product-content">
+                        <h3 class="product-title">Bouquet Wrapping</h3>
+                        <p class="product-description">Beautiful floral wrapping papers made from sustainable materials for elegant flower arrangements.</p>
+                        <div class="product-features">
+                            <span class="feature-tag">Water Resistant</span>
+                            <span class="feature-tag">Elegant Designs</span>
+                            <span class="feature-tag">Eco-Friendly</span>
+                        </div>
+                        <div class="product-price">Starting at $0.25/sheet</div>
+                        <button class="order-btn">Start Customizing</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2 class="cta-title">Ready to Place Your First Order?</h2>
+            <p class="cta-subtitle">Join hundreds of businesses reducing their environmental impact with our sustainable packaging solutions.</p>
+            <div class="cta-buttons">
+                <button class="cta-btn">Get Custom Quote</button>
+                <button class="cta-btn secondary-btn">View Sample Kit</button>
+                <button class="cta-btn secondary-btn">Contact Sales Team</button>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
