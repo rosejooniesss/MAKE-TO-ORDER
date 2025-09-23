@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order form</title>
+</head>
+<body>
+    <h2>Create Sales Order</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ order_form.as_p }}
+
+  <table>
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for form in formset %}
+        <tr>
+          <td>{{ form.product }}</td>
+          <td>{{ form.quantity }}</td>
+          <td>{{ form.DELETE }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <button type="submit">Save Order</button>
+</form>
+
+</body>
+</html>
